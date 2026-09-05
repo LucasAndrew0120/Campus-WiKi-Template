@@ -52,7 +52,7 @@ export default defineConfig({
         },
       ],
     },
-    socialLinks: [],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/LucasAndrew0120/Campus-WiKi-Template' }],
     outline: { level: [2, 3], label: '本页目录' },
     sidebarMenuLabel: '文档目录',
     returnToTopLabel: '返回顶部',
