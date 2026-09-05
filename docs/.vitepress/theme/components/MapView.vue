@@ -26,7 +26,8 @@ let AMap = null
 const mapReady = ref(false)
 const mapError = ref('')
 
-const currentCampus = ref('h')
+/* 默认校区取 CAMPUS_CONFIG 第一个 key，避免与 map-data.js 的校区 key 不同步而崩溃 */
+const currentCampus = ref(Object.keys(CAMPUS_CONFIG)[0] || '')
 const currentCategory = ref('all')
 const searchKeyword = ref('')
 const sidebarOpen = ref(false)
