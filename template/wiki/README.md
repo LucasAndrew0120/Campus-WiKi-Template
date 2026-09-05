@@ -2,6 +2,8 @@
 
 这是一个可直接复制的通用 VitePress Wiki 模板。
 
+需要 Node.js `22.20.0` 或更高版本。
+
 ```bash
 npm ci
 npm run dev

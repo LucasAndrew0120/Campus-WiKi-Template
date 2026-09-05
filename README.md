@@ -27,6 +27,8 @@ Campus-WiKi-Template 脱胎于 [QUTWiKi](https://github.com/QUT-Lib/QUT-WiKi)，
 
 ## 快速开始
 
+需要 Node.js `22.20.0` 或更高版本。插件包当前直接导出 TypeScript 源码，较早的 Node.js 22 版本无法在 VitePress 配置加载阶段解析这些入口。
+
 运行插件文档站：
 
 ```bash

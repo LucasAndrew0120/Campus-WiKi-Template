@@ -24,11 +24,15 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v7
         with:
-          node-version: 22.17.0
+          node-version: 22.20.0
           cache: npm
           cache-dependency-path: |
+            package-lock.json
             template/wiki/package-lock.json
             code/package-lock.json
+
+      - name: Install workspace dependencies
+        run: npm ci
 
       - name: Install Wiki dependencies
         working-directory: template/wiki
