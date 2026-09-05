@@ -1,5 +1,5 @@
 export const site = {
-  title: 'My Wiki',
+  title: 'Campus-WiKi-Template',
   description: 'A reusable VitePress wiki',
   repository: 'https://github.com/your-name/your-wiki',
   directoryLabels: {

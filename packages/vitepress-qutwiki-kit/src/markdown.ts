@@ -1,6 +1,10 @@
 import type MarkdownIt from 'markdown-it'
 import type StateCore from 'markdown-it/lib/rules_core/state_core.mjs'
 import { safeLink } from './link.ts'
+import { xlsxTablePlugin, type XlsxTableOptions } from './xlsx.ts'
+
+export { xlsxTablePlugin, xlsxCacheKey } from './xlsx.ts'
+export type { XlsxTableOptions } from './xlsx.ts'
 
 export interface FlinkItem {
   name: string
@@ -21,6 +25,7 @@ export interface WikiMarkdownOptions {
   imageCaptions?: boolean
   flinks?: boolean
   wordCount?: boolean | WordCountOptions
+  xlsx?: false | XlsxTableOptions
 }
 
 const FLINK_OPEN = /^<flink(\s[^>]*)?>\s*$/
@@ -108,4 +113,5 @@ export function installWikiMarkdown(md: MarkdownIt, options: WikiMarkdownOptions
   if (options.flinks !== false) md.use(flinkBlockPlugin)
   if (options.imageCaptions !== false) md.use(imageCaptionPlugin)
   if (options.wordCount !== false) md.use(wordCountPlugin, typeof options.wordCount === 'object' ? options.wordCount : {})
+  if (options.xlsx) md.use(xlsxTablePlugin, options.xlsx)
 }

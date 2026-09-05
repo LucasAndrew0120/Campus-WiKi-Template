@@ -7,10 +7,10 @@ import { site } from './site'
 
 const currentDirectory = dirname(fileURLToPath(import.meta.url))
 const docsRoot = resolve(currentDirectory, '..')
-const guideRoot = resolve(docsRoot, 'guide')
-const buildGuide = () => createContentTree({
-  root: guideRoot,
-  routeBase: '/guide/',
+const contentRoot = resolve(docsRoot, 'content')
+const buildContent = () => createContentTree({
+  root: contentRoot,
+  routeBase: '/content/',
   directoryLabels: site.directoryLabels,
   sectionOrder: site.sectionOrder,
 })
@@ -21,12 +21,14 @@ export default defineConfig({
   description: site.description,
   cleanUrls: true,
   lastUpdated: true,
+  outDir: resolve(currentDirectory, '../../dist'),
+  base: process.env.SITE_BASE || '/',
   head: [['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }]],
-  vite: { plugins: [createContentTreeWatcher(guideRoot, buildGuide)] },
-  markdown: { config: (md) => installWikiMarkdown(md) },
+  vite: { plugins: [createContentTreeWatcher(contentRoot, buildContent)] },
+  markdown: { config: (md) => installWikiMarkdown(md, { xlsx: { docsRoot } }) },
   themeConfig: {
-    nav: [{ text: '首页', link: '/' }, ...buildGuide().map(sidebarItemToNav)],
-    sidebar: { '/guide/': buildGuide() },
+    nav: [{ text: '首页', link: '/' }, ...buildContent().map(sidebarItemToNav)],
+    sidebar: { '/content/': buildContent() },
     socialLinks: [{ icon: 'github', link: site.repository }],
     search: {
       provider: 'local',

@@ -5,7 +5,7 @@ order: 1
 
 # 开始使用
 
-将 Markdown 文件放入 `docs/guide` 后，导航会自动更新。
+将 Markdown 文件放入 `docs/content` 下的栏目目录后，导航会自动更新。
 
 ![示例图片](https://vitepress.dev/vitepress-logo-large.webp)
 

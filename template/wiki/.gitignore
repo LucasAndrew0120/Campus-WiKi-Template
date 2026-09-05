@@ -1,4 +1,6 @@
 node_modules
 docs/.vitepress/cache
 docs/.vitepress/dist
+docs/.http_cache
+dist
 .env.local

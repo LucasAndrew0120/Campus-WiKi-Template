@@ -13,13 +13,15 @@
     ".": "./src/index.ts",
     "./config": "./src/config.ts",
     "./markdown": "./src/markdown.ts",
+    "./xlsx": "./src/xlsx.ts",
     "./twikoo": "./src/twikoo.ts",
     "./components/*": "./src/components/*.vue"
   },
   "peerDependencies": {
     "twikoo": ">=1.6.0",
     "vitepress": ">=1.5.0 <2.0.0",
-    "vue": ">=3.5.0"
+    "vue": ">=3.5.0",
+    "xlsx": ">=0.20.3"
   },
   "peerDependenciesMeta": {
     "twikoo": {

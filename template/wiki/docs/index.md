@@ -2,13 +2,13 @@
 layout: home
 
 hero:
-  name: My Wiki
+  name: Campus-WiKi-Template
   text: 团队知识，从这里开始
-  tagline: 基于 VitePress QUTWiKi Kit 构建
+  tagline: 基于 Campus-WiKi-Template 构建
   actions:
     - theme: brand
       text: 阅读指南
-      link: /guide/getting-started
+      link: /content/guide/getting-started
 
 features:
   - title: Markdown 优先

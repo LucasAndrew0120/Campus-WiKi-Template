@@ -17,3 +17,89 @@
   font-size: 13px;
   text-align: center;
 }
+
+.xlsx-cards {
+  margin: 16px 0;
+}
+
+.xlsx-card-group {
+  margin-bottom: 28px;
+}
+
+.xlsx-card-group-title,
+.xlsx-sheet-title {
+  margin: 24px 0 12px !important;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--vp-c-divider);
+  font-size: 18px !important;
+}
+
+.xlsx-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.xlsx-card-face {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  height: 100%;
+  padding: 16px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  background: var(--vp-c-bg-soft);
+  text-align: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.xlsx-card-face:hover {
+  box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
+  transform: translateY(-2px);
+}
+
+.xlsx-card-avatar-el {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.xlsx-card-name {
+  color: var(--vp-c-text-1);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.xlsx-card-desc {
+  color: var(--vp-c-text-2);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.xlsx-card-tags,
+.xlsx-card-info,
+.xlsx-card-contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.xlsx-badge {
+  padding: 1px 7px;
+  border-radius: 12px;
+  color: var(--vp-c-tip-1);
+  background: var(--vp-c-tip-soft);
+  font-size: 11.5px;
+}
+
+.xlsx-card-link {
+  padding: 0;
+  border: 0;
+  color: var(--vp-c-brand-1);
+  background: transparent;
+  cursor: pointer;
+}
