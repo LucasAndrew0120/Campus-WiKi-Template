@@ -1,0 +1,7 @@
+*
+!package.json
+!package-lock.json
+!document-urls.mjs
+!qutwiki-sync.mjs
+!server.mjs
+!xlsx-sync.mjs

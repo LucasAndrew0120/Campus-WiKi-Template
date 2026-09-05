@@ -1,0 +1,23 @@
+services:
+  xlsx-sync:
+    build:
+      context: ./code
+    restart: unless-stopped
+    init: true
+    ports:
+      - "127.0.0.1:${XLSX_SYNC_PORT:-3456}:3456"
+    environment:
+      CACHE_DIR: /data/xlsx-cache
+      CACHE_TTL: ${CACHE_TTL:-3600000}
+      MAX_CONCURRENT_SYNCS: ${MAX_CONCURRENT_SYNCS:-2}
+      MAX_SYNC_QUEUE: ${MAX_SYNC_QUEUE:-10}
+      DOC_URLS: ${DOC_URLS:-}
+      PREWARM_STRICT: ${PREWARM_STRICT:-0}
+    volumes:
+      - xlsx-cache:/data/xlsx-cache
+    shm_size: 1gb
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  xlsx-cache:
