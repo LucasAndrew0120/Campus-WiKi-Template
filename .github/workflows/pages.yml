@@ -1,0 +1,80 @@
+name: Deploy Wiki to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.17.0
+          cache: npm
+          cache-dependency-path: |
+            template/wiki/package-lock.json
+            code/package-lock.json
+
+      - name: Install Wiki dependencies
+        working-directory: template/wiki
+        run: npm ci
+
+      - name: Install Chromium libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libexpat1 libnspr4 libnss3
+
+      - name: Install XLSX sync dependencies
+        working-directory: code
+        run: npm ci --ignore-scripts
+
+      - name: Restore XLSX cache
+        uses: actions/cache@v4
+        with:
+          path: template/wiki/docs/.http_cache
+          key: xlsx-${{ runner.os }}-${{ hashFiles('template/wiki/docs/**/*.md') }}
+          restore-keys: xlsx-${{ runner.os }}-
+
+      - name: Sync Tencent documents
+        env:
+          CACHE_DIR: ${{ github.workspace }}/template/wiki/docs/.http_cache
+          DOC_URL: ${{ vars.DOC_URL }}
+          DOC_URLS: ${{ vars.DOC_URLS }}
+        run: node code/qutwiki-sync.mjs --docs template/wiki/docs
+
+      - name: Build Wiki
+        working-directory: template/wiki
+        env:
+          SITE_BASE: ${{ vars.SITE_BASE }}
+        run: npm run build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: template/wiki/dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
