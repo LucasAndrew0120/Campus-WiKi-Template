@@ -24,6 +24,7 @@ export default defineConfig({
       { text: '介绍', link: '/' },
       { text: '功能说明', link: '/content/plugin/' },
       { text: '使用案例', link: '/content/examples/' },
+      { text: '学校地图', link: '/map' },
       { text: '部署', link: '/content/deployment' },
     ],
     sidebar: {
