@@ -4,9 +4,11 @@
 
 ```bash
 cd template/wiki
-npm install
+npm ci
 npm run dev
 ```
+
+首次克隆模板，或删除过 `node_modules` 后，需要先执行 `npm ci` 恢复锁文件中记录的依赖。若直接运行开发命令时出现 `vitepress` 不是内部或外部命令，也应先执行 `npm ci`。
 
 复制到独立仓库后，修改以下位置：
 

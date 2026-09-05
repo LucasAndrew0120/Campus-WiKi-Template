@@ -1,4 +1,4 @@
-# My VitePress Wiki
+# Campus-WiKi-Template
 
 这是一个可直接复制的通用 VitePress Wiki 模板。
 
@@ -6,6 +6,8 @@
 npm ci
 npm run dev
 ```
+
+首次克隆模板，或清理过 `node_modules` 后，必须先执行 `npm ci`。如果提示 `vitepress` 不是内部或外部命令，表示依赖尚未安装。
 
 腾讯文档同步和生产构建：
 

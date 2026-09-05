@@ -34,6 +34,8 @@ npm ci
 npm run dev
 ```
 
+首次克隆仓库，或清理过 `node_modules` 后，必须先执行 `npm ci`。如果终端提示 `vitepress` 不是内部或外部命令，说明本地依赖尚未安装，重新执行 `npm ci` 即可。
+
 构建文档站和模板：
 
 ```bash
@@ -82,7 +84,7 @@ export default defineConfig({
 
 ```bash
 cd template/wiki
-npm install
+npm ci
 npm run dev
 ```
 
