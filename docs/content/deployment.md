@@ -7,11 +7,13 @@ Campus-WiKi-Template 脱胎于 [QUTWiKi](https://github.com/QUT-Lib/QUT-WiKi)，
 | 路径 | 内容 | 是否提交 |
 | --- | --- | --- |
 | `template/wiki/docs/public/` | 图片、本地 XLSX 等源静态文件 | 是 |
-| `template/wiki/docs/.http_cache/` | 在线文档解析缓存 | 否 |
-| `template/wiki/dist/` | 完整静态网站构建产物 | 否 |
+| `docs/.http_cache/` | 文档站的在线文档解析缓存 | 否 |
+| `docs/.vitepress/dist/` | GitHub Pages 文档站构建产物 | 否 |
+| `template/wiki/docs/.http_cache/` | 示例 Wiki 的在线文档解析缓存 | 否 |
+| `template/wiki/dist/` | 示例 Wiki 的静态网站构建产物 | 否 |
 | `code/` | Chromium XLSX 同步后端及 CLI | 是 |
 
-静态部署端只需要接收 `template/wiki/dist/`。迁移到 Nginx、Caddy、对象存储或其他静态平台时，不需要调整 Wiki 内容目录。
+GitHub Pages 发布根文档站的 `docs/.vitepress/dist/`；使用模板建立自己的 Wiki 时部署 `template/wiki/dist/`。两者都是完整静态目录，迁移到 Nginx、Caddy、对象存储或其他静态平台时不需要重新整理内部资源。
 
 ## 在线文档
 
@@ -42,18 +44,18 @@ DOC_URL=https://docs.qq.com/sheet/AAAA
 
 `.github/workflows/pages.yml` 使用 GitHub 官方 Pages Artifact，不需要也不会创建 `gh-pages` 静态分支：
 
-1. 恢复 `docs/.http_cache` 的 Actions 缓存。
-2. 扫描 `template/wiki/docs/**/*.md` 中所有 `xlsx` 代码块。
+1. 恢复根文档站 `docs/.http_cache` 的 Actions 缓存。
+2. 扫描 `docs/**/*.md` 中所有 `xlsx` 代码块。
 3. 合并仓库变量 `DOC_URLS` 中预设的地址并按文档 ID 去重。
 4. 运行 Chromium，将结果提前写入插件缓存。
-5. 构建唯一的静态目录 `template/wiki/dist/`。
+5. 构建文档站静态目录 `docs/.vitepress/dist/`。
 6. 上传并部署 Pages Artifact。
 
-在 GitHub 仓库的 Settings > Pages 中将 Source 设为 **GitHub Actions**。可设置以下 Actions Variables：
+在 GitHub 仓库的 Settings > Pages 中将 Source 设为 **GitHub Actions**。项目 Pages 的路径前缀会根据仓库名自动生成，例如仓库 `Campus-WiKi-Template` 会使用 `/Campus-WiKi-Template/`，无需手工设置。可设置以下 Actions Variables：
 
 | 变量 | 示例 | 说明 |
 | --- | --- | --- |
-| `SITE_BASE` | `/Campus-WiKi-Template/` | 项目 Pages 的路径前缀；自定义域名填 `/` |
+| `SITE_BASE` | `/` | 可选覆盖；使用自定义域名或用户主页仓库时填 `/` |
 | `DOC_URLS` | `["https://docs.qq.com/sheet/AAAA"]` | 可选的预热文档列表 |
 
 本地执行相同流程：

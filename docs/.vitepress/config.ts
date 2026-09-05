@@ -2,13 +2,20 @@ import { defineConfig } from 'vitepress'
 import { installWikiMarkdown } from 'vitepress-qutwiki-kit/markdown'
 import { tokenizeChineseSearch } from 'vitepress-qutwiki-kit/config'
 
+const repositoryName = process.env.GITHUB_REPOSITORY?.split('/').at(-1)
+const defaultBase = process.env.GITHUB_ACTIONS === 'true' && repositoryName && !repositoryName.endsWith('.github.io')
+  ? `/${repositoryName}/`
+  : '/'
+const base = process.env.SITE_BASE || defaultBase
+
 export default defineConfig({
   lang: 'zh-CN',
   title: 'Campus-WiKi-Template',
   description: '面向内容型 VitePress 站点的组件、Markdown 扩展与配置工具集',
   cleanUrls: true,
   lastUpdated: true,
-  head: [['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }]],
+  base,
+  head: [['link', { rel: 'icon', href: `${base}favicon.svg`, type: 'image/svg+xml' }]],
   markdown: {
     config: (md) => installWikiMarkdown(md),
   },

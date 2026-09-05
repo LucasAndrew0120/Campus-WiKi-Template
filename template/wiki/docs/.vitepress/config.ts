@@ -8,6 +8,11 @@ import { site } from './site'
 const currentDirectory = dirname(fileURLToPath(import.meta.url))
 const docsRoot = resolve(currentDirectory, '..')
 const contentRoot = resolve(docsRoot, 'content')
+const repositoryName = process.env.GITHUB_REPOSITORY?.split('/').at(-1)
+const defaultBase = process.env.GITHUB_ACTIONS === 'true' && repositoryName && !repositoryName.endsWith('.github.io')
+  ? `/${repositoryName}/`
+  : '/'
+const base = process.env.SITE_BASE || defaultBase
 const buildContent = () => createContentTree({
   root: contentRoot,
   routeBase: '/content/',
@@ -22,8 +27,8 @@ export default defineConfig({
   cleanUrls: true,
   lastUpdated: true,
   outDir: resolve(currentDirectory, '../../dist'),
-  base: process.env.SITE_BASE || '/',
-  head: [['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }]],
+  base,
+  head: [['link', { rel: 'icon', href: `${base}favicon.svg`, type: 'image/svg+xml' }]],
   vite: { plugins: [createContentTreeWatcher(contentRoot, buildContent)] },
   markdown: { config: (md) => installWikiMarkdown(md, { xlsx: { docsRoot } }) },
   themeConfig: {

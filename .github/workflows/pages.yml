@@ -28,14 +28,9 @@ jobs:
           cache: npm
           cache-dependency-path: |
             package-lock.json
-            template/wiki/package-lock.json
             code/package-lock.json
 
       - name: Install workspace dependencies
-        run: npm ci
-
-      - name: Install Wiki dependencies
-        working-directory: template/wiki
         run: npm ci --include=optional
 
       - name: Install Chromium libraries
@@ -50,19 +45,18 @@ jobs:
       - name: Restore XLSX cache
         uses: actions/cache@v6
         with:
-          path: template/wiki/docs/.http_cache
-          key: xlsx-${{ runner.os }}-${{ hashFiles('template/wiki/docs/**/*.md') }}
+          path: docs/.http_cache
+          key: xlsx-${{ runner.os }}-${{ hashFiles('docs/**/*.md') }}
           restore-keys: xlsx-${{ runner.os }}-
 
       - name: Sync Tencent documents
         env:
-          CACHE_DIR: ${{ github.workspace }}/template/wiki/docs/.http_cache
+          CACHE_DIR: ${{ github.workspace }}/docs/.http_cache
           DOC_URL: ${{ vars.DOC_URL }}
           DOC_URLS: ${{ vars.DOC_URLS }}
-        run: node code/qutwiki-sync.mjs --docs template/wiki/docs
+        run: node code/qutwiki-sync.mjs --docs docs
 
-      - name: Build Wiki
-        working-directory: template/wiki
+      - name: Build documentation site
         env:
           SITE_BASE: ${{ vars.SITE_BASE }}
         run: npm run build
@@ -70,7 +64,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: template/wiki/dist
+          path: docs/.vitepress/dist
 
   deploy:
     environment:
