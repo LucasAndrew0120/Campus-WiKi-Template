@@ -4,7 +4,7 @@ import { tokenizeChineseSearch } from 'vitepress-qutwiki-kit/config'
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: 'VitePress QUTWiKi Kit',
+  title: 'Campus-WiKi-Template',
   description: '面向内容型 VitePress 站点的组件、Markdown 扩展与配置工具集',
   cleanUrls: true,
   lastUpdated: true,
@@ -15,32 +15,34 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: '介绍', link: '/' },
-      { text: '快速开始', link: '/plugin/usage' },
-      { text: '示例', link: '/examples/' },
-      { text: '模板', link: '/template' },
+      { text: '功能说明', link: '/content/plugin/' },
+      { text: '使用案例', link: '/content/examples/' },
+      { text: '部署', link: '/content/deployment' },
     ],
     sidebar: {
-      '/plugin/': [
+      '/content/': [
         {
-          text: '插件文档',
+          text: '插件功能',
           items: [
-            { text: '插件介绍', link: '/plugin/' },
-            { text: '安装与配置', link: '/plugin/usage' },
-            { text: 'API 与边界', link: '/plugin/migration' },
+            { text: '功能说明', link: '/content/plugin/' },
+            { text: '安装与配置', link: '/content/plugin/usage' },
+            { text: 'API 与边界', link: '/content/plugin/migration' },
           ],
         },
-      ],
-      '/examples/': [
         {
           text: '真实用法示例',
           items: [
-            { text: '组件与 Markdown', link: '/examples/' },
-            { text: '友链卡片', link: '/examples/flinks' },
+            { text: '组件与 Markdown', link: '/content/examples/' },
+            { text: '友链卡片', link: '/content/examples/flinks' },
           ],
         },
-      ],
-      '/template': [
-        { text: '模板使用', link: '/template' },
+        {
+          text: '模板与部署',
+          items: [
+            { text: '模板使用', link: '/content/template' },
+            { text: '部署与 XLSX 同步', link: '/content/deployment' },
+          ],
+        },
       ],
     },
     socialLinks: [],

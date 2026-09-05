@@ -1,15 +1,22 @@
 # vitepress-qutwiki-kit
 
-为 VitePress 1.x 提供自动导航、中文搜索、Markdown 增强和可复用内容组件。
+脱胎于 QUTWiKi，为 VitePress 1.x 提供自动导航、中文搜索、XLSX 渲染、Markdown 增强和可复用内容组件。
 
 ```bash
 npm install vitepress-qutwiki-kit
 ```
 
+使用 XLSX 功能时还需安装 SheetJS 官方发布包：
+
+```bash
+npm install https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz
+```
+
 ## 入口
 
 - `vitepress-qutwiki-kit`：Gallery、AppCards、Flink/Flinks、ImageViewer 和组件安装器
-- `vitepress-qutwiki-kit/markdown`：字数、阅读时间、图片题注和友链容器
+- `vitepress-qutwiki-kit/markdown`：字数、阅读时间、图片题注、友链容器和可选 XLSX 渲染
+- `vitepress-qutwiki-kit/xlsx`：XLSX 插件和腾讯文档缓存键工具
 - `vitepress-qutwiki-kit/config`：内容树、开发监听器和中文搜索 tokenizer
 - `vitepress-qutwiki-kit/twikoo`：可选 Twikoo 评论组件
 

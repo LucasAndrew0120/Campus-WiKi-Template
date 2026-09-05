@@ -1,11 +1,15 @@
-# VitePress QUTWiKi Kit
+# Campus-WiKi-Template
 
 面向第三方 VitePress 站点的 Wiki 工具包，提供两个可独立使用的版本：
 
 - **插件版**：`packages/vitepress-qutwiki-kit/`，接入已有 VitePress 1.x 项目。
 - **模板版**：`template/wiki/`，复制后直接建立新的内容型 Wiki。
 
-仓库不包含任何学校正文、地图点位、组织名单、品牌资源或业务后端。组件用法参考了已在线运行的 [wiki.quters.top 功能说明](https://wiki.quters.top/start/about/features)，并保留线上页面链接作为真实案例。
+仓库不包含任何学校正文、地图点位、组织名单、品牌资源或校园业务后端；`code/` 仅提供通用的腾讯文档 XLSX 同步服务。组件用法参考了已在线运行的 [wiki.quters.top 功能说明](https://wiki.quters.top/start/about/features)，并保留线上页面链接作为真实案例。
+
+## 项目沿革
+
+Campus-WiKi-Template 脱胎于 [QUTWiKi](https://github.com/QUT-Lib/QUT-WiKi)，由其 VitePress 配置、通用组件、Markdown 扩展和 XLSX 同步能力抽离整理而成。该仓库面向可复用的校园 Wiki 场景独立演进，不是 QUTWiKi 站点镜像，也不继承原站的校园正文、组织数据、地图点位、品牌资源、域名或部署配置。
 
 ## 插件能力
 
@@ -19,6 +23,7 @@
 - Flink/Flinks 友链卡片和 `<flink>` 容器语法
 - ImageViewer 图片缩放与拖动
 - 独立入口中的可选 Twikoo 评论组件
+- XLSX 卡片渲染、腾讯文档缓存和 Chromium 同步后端
 
 ## 快速开始
 
@@ -85,18 +90,19 @@ npm run dev
 
 - `docs/.vitepress/site.ts`：站名、描述、仓库链接和目录名称
 - `docs/index.md`：首页
-- `docs/guide/`：内容
+- `docs/content/`：所有普通文章，可继续按栏目分目录
 - `docs/.vitepress/theme/style.css`：品牌色
 
 模板当前通过 `file:../../packages/vitepress-qutwiki-kit` 引用本仓库插件。独立使用时将其改为 npm 版本。
 
 ## 文档
 
-- [插件介绍](docs/plugin/index.md)
-- [安装与配置](docs/plugin/usage.md)
-- [API 与边界](docs/plugin/migration.md)
-- [真实用法示例](docs/examples/index.md)
-- [模板说明](docs/template.md)
+- [插件介绍](docs/content/plugin/index.md)
+- [安装与配置](docs/content/plugin/usage.md)
+- [API 与边界](docs/content/plugin/migration.md)
+- [真实用法示例](docs/content/examples/index.md)
+- [模板说明](docs/content/template.md)
+- [部署与 XLSX 同步](docs/content/deployment.md)
 
 ## 真实案例
 

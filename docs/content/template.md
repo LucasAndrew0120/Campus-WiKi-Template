@@ -12,7 +12,7 @@ npm run dev
 
 - `docs/.vitepress/site.ts`：站名、描述、仓库地址和目录名称
 - `docs/index.md`：首页文案
-- `docs/guide/`：示例文章和真实内容
+- `docs/content/`：所有示例文章和真实内容，可继续按栏目分目录
 - `docs/.vitepress/theme/style.css`：品牌色及少量展示样式
 
 模板示例同样参考 [wiki.quters.top](https://wiki.quters.top/) 中已经实际运行的组件组合，但不包含其校园正文、地图、组织数据、品牌资源或服务端代码。

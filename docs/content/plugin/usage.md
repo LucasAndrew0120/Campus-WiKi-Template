@@ -6,7 +6,7 @@
 npm install vitepress-qutwiki-kit
 ```
 
-VitePress `1.5` 至 `1.x` 和 Vue `3.5+` 是 peer dependencies。只有使用评论组件时才需要额外安装 `twikoo`。
+VitePress `1.5` 至 `1.x` 和 Vue `3.5+` 是 peer dependencies。只有使用评论组件时才需要额外安装 `twikoo`；使用 XLSX 扩展时还需安装 SheetJS `xlsx >=0.20.3`。
 
 ## 注册组件
 
@@ -43,6 +43,31 @@ export default defineConfig({
 ```
 
 文章可在 frontmatter 中使用 `wordCount: false` 关闭统计。图片题注默认取 alt 文本。
+
+## XLSX
+
+先安装 SheetJS 官方发布包，再将站点的 `docs` 绝对路径传给插件：
+
+```bash
+npm install https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz
+```
+
+```ts
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const docsRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+
+export default defineConfig({
+  markdown: {
+    config(md) {
+      installWikiMarkdown(md, { xlsx: { docsRoot } })
+    },
+  },
+})
+```
+
+本地文件放在 `docs/public/resources/`，在线腾讯文档由 `QUTWIKI_XLSX_API` 指定的同步后端解析。完整的 Docker、GitHub Actions 和缓存配置参见[部署与 XLSX 同步](/content/deployment)。
 
 ## 中文搜索
 

@@ -10,6 +10,8 @@
 | `wordCountPlugin` | 只安装字数和阅读时间 |
 | `imageCaptionPlugin` | 只安装图片题注 |
 | `flinkBlockPlugin` | 只安装友链容器语法 |
+| `xlsxTablePlugin` | 在构建期将本地或腾讯文档 XLSX 渲染为卡片 |
+| `xlsxCacheKey(url)` | 返回腾讯文档 ID，作为同步端和插件端的统一缓存键 |
 | `createContentTree(options)` | 从文件系统生成 sidebar 数据 |
 | `createContentTreeWatcher(root, build)` | 内容结构变化时重启开发服务 |
 | `sidebarItemToNav(item)` | 将 sidebar 节点转换为 nav 节点 |
@@ -18,7 +20,7 @@
 ## 不包含的能力
 
 - 不提供地图 SDK、校园点位或定位服务。
-- 不提供 XLSX 解析、在线表格同步或浏览器后端。
+- XLSX 渲染为可选能力；在线腾讯文档可使用 `code/` 下的 Chromium 同步后端或 Actions 预热缓存。
 - 不提供站点 Logo、主题色、统计脚本、域名和部署平台配置。
 - 不自动读取 Git 贡献者，避免要求第三方构建环境必须具有完整 Git 历史。
 - 不修改 VitePress 默认主题内部 DOM，侧栏抽屉等强主题能力应由站点自行实现。
