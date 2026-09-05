@@ -32,7 +32,7 @@ jobs:
 
       - name: Install Wiki dependencies
         working-directory: template/wiki
-        run: npm ci
+        run: npm ci --include=optional
 
       - name: Install Chromium libraries
         run: |
