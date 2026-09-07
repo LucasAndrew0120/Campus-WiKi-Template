@@ -1,6 +1,6 @@
 import { defineConfig, type DefaultTheme } from 'vitepress'
 import { installWikiMarkdown } from 'vitepress-qutwiki-kit/markdown'
-import { tokenizeChineseSearch } from 'vitepress-qutwiki-kit/config'
+import { createSiteStats, tokenizeChineseSearch } from 'vitepress-qutwiki-kit/config'
 import { readdirSync, readFileSync, statSync, existsSync } from 'fs'
 import { resolve, extname, dirname, join } from 'path'
 import { fileURLToPath } from 'url'
@@ -173,6 +173,7 @@ const defaultBase = process.env.GITHUB_ACTIONS === 'true' && repositoryName && !
   ? `/${repositoryName}/`
   : '/'
 const base = process.env.SITE_BASE || defaultBase
+const siteStats = createSiteStats(docsRoot)
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -223,6 +224,10 @@ export default defineConfig({
       ],
     },
     socialLinks: [{ icon: 'github', link: 'https://github.com/LucasAndrew0120/Campus-WiKi-Template' }],
+    footer: {
+      message: `基于 VitePress 构建  ·  全站共计 <span style="color:var(--vp-c-brand-1)">${(siteStats.wordCount / 1000).toFixed(1)}K</span> 字`,
+      copyright: 'Copyright © 2026 <a href="https://github.com/LucasAndrew0120/Campus-WiKi-Template" style="color:inherit;">Campus WiKi Template</a><br>本站源代码与插件文档采用 <a href="https://github.com/LucasAndrew0120/Campus-WiKi-Template/blob/main/LICENSE" style="color:inherit;">MIT License</a>',
+    },
     outline: { level: [2, 3], label: '本页目录' },
     sidebarMenuLabel: '文档目录',
     returnToTopLabel: '返回顶部',

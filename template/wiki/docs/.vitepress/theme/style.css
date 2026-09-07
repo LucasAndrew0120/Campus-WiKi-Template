@@ -10,6 +10,10 @@
   font-weight: 400;
 }
 
+.VPFooter.has-sidebar {
+  display: block !important;
+}
+
 .wk-img-caption {
   display: block;
   margin-top: 6px;

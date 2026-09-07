@@ -12,6 +12,11 @@ export interface ContentTreeOptions {
   requireDirectoryLabels?: boolean
 }
 
+export interface SiteStats {
+  articleCount: number
+  wordCount: number
+}
+
 function frontmatterValue(source: string, key: string): string | undefined {
   const match = source.match(/^---\s*\r?\n([\s\S]*?)\r?\n---/)
   return match?.[1].match(new RegExp(`^${key}:\\s*(.+)$`, 'm'))?.[1].trim().replace(/^['"]|['"]$/g, '')
@@ -104,6 +109,28 @@ export function createContentTreeWatcher(root: string, build: () => unknown) {
       for (const event of ['add', 'unlink', 'addDir', 'unlinkDir', 'change']) server.watcher.on(event, check)
     },
   }
+}
+
+export function createSiteStats(root: string): SiteStats {
+  const stats: SiteStats = { articleCount: 0, wordCount: 0 }
+  const visit = (directory: string) => {
+    for (const name of readdirSync(directory)) {
+      if (name === '.vitepress') continue
+      const file = join(directory, name)
+      const fileStat = statSync(file)
+      if (fileStat.isDirectory()) {
+        visit(file)
+        continue
+      }
+      if (extname(name) !== '.md') continue
+      const source = readFileSync(file, 'utf8')
+      if (frontmatterValue(source, 'wordCount') === 'false') continue
+      stats.articleCount += 1
+      stats.wordCount += (source.match(/[\u4e00-\u9fff]/g) ?? []).length
+    }
+  }
+  visit(root)
+  return stats
 }
 
 export function tokenizeChineseSearch(text: string): string[] {
