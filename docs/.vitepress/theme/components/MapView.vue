@@ -11,7 +11,7 @@ import {
 /* 高德地图 Web 端 JS API key（lbs.amap.com 控制台申请，应用类型：Web端(JS API)）
 此密钥有域名白名单限制，因此请更换为你自己的 key，否则地图无法加载。
 */
-const AMAP_KEY = 'cc942326fd33951c36e3f35a16bc204f'
+const AMAP_KEY = '应用密钥'
 
 const PIN_SIZE = 28
 const PIN_SCALE = { idle: 1, hover: 1.3, selected: 1.4 }
@@ -95,7 +95,7 @@ function loadAMap() {
     if (window.AMap) return resolve(window.AMap)
     /* 2021 年后申请的 key 需要安全密钥，必须在 SDK 脚本加载前设置 */
     window._AMapSecurityConfig = {
-      securityJsCode: '08b66b63cfa12c5beccf95cb1cdb8839'
+      securityJsCode: '安全密钥'
     }
     window.__QUTMapReady = () => {
       if (window.AMap) resolve(window.AMap)
