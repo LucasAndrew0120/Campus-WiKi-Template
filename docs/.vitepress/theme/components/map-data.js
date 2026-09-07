@@ -85,7 +85,7 @@ export const BUILDINGS = [
     name: '建筑名称',
     category: '建筑分类',
     campusId: '校区代号',
-    coord: [xxx,xxx],
+    coord: [],
     desc: '此处为建筑描述'
   },
 ]
